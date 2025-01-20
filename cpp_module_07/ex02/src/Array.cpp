@@ -6,14 +6,14 @@
 /*   By: dsindres <dsindres@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 10:51:18 by dsindres          #+#    #+#             */
-/*   Updated: 2025/01/15 15:36:13 by dsindres         ###   ########.fr       */
+/*   Updated: 2025/01/20 10:45:29 by dsindres         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/Header.hpp"
 
 template<typename T>
-Array<T>::Array()
+Array<T>::Array() 
 {
     this->len = 0;
     this->array = new T[0];
