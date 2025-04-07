@@ -6,7 +6,7 @@
 /*   By: dsindres <dsindres@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 09:12:56 by dsindres          #+#    #+#             */
-/*   Updated: 2025/01/29 12:15:56 by dsindres         ###   ########.fr       */
+/*   Updated: 2025/04/07 10:08:38 by dsindres         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,14 +154,29 @@ int     BitcoinExchange::value_verif(std::string line)
         std::cout << line << " : missing value" << std::endl;
         return (1);
     }
+    int dot_count = 0;
     for (std::size_t i = 0; i < value.length(); ++i)
     {
-         if ((!std::isdigit(value[i]) && value[i] != '.')
-            || (value[0] == '.') || (value[value.length() - 1] == '.'))
-         {
+        if (value[i] == '.')
+        {
+            dot_count++;
+            if (i == 0 || i == value.length() - 1)
+            {
+                std::cout << line << " : not a valid value" << std::endl;
+                return 1;
+            }
+        }
+        else if (!std::isdigit(value[i]))
+        {
             std::cout << line << " : not a valid value" << std::endl;
-            return (1);
-         }
+            return 1;
+        }
+    }
+
+    if (dot_count > 1)
+    {
+        std::cout << line << " : not a valid value" << std::endl;
+        return 1;
     }
     float number = std::atof(value.c_str());
     if (number < 0 || number > 1000)
@@ -222,14 +237,16 @@ int     BitcoinExchange::find_date(std::string date, std::string map_date)
     int day = std::atoi(date_day.c_str());
     int map_day = std::atoi(date_map_day.c_str());
     
-    if (year >= map_year)
+    if (year > map_year)
+        return (0);
+    else if (year == map_year)
     {
-        if (month >= map_month)
+        if (month > map_month)
+            return (0);
+        else if (month == map_month)
         {
-            if(day >= map_day)
-            {
+            if (day > map_day)
                 return (0);
-            }
             else
                 return (1);
         }

@@ -6,7 +6,7 @@
 /*   By: dsindres <dsindres@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 16:10:14 by dsindres          #+#    #+#             */
-/*   Updated: 2025/01/22 11:21:43 by dsindres         ###   ########.fr       */
+/*   Updated: 2025/04/02 11:13:42 by dsindres         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,29 +62,41 @@ void    Span::addNumber(const int nbr)
     lst.push_back(nbr);
 }
 
-int    Span::shortestSpan(void)
+int Span::shortestSpan()
 {
     if (lst.size() <= 1)
         throw NotEnoughException();
+
     lst.sort();
-    std::vector<int> diff(lst.size());
-    std::adjacent_difference(lst.begin(), lst.end(), diff.begin());
-    diff.erase(diff.begin());
-    int min_diff = *std::min_element(diff.begin(), diff.end());
-    return (min_diff);
+    int min_diff = std::numeric_limits<int>::max();
+
+    std::list<int>::iterator prev = lst.begin();
+    std::list<int>::iterator it = prev;
+    ++it;
+
+    while (it != lst.end())
+    {
+        int diff = *it - *prev;
+        if (diff < min_diff)
+            min_diff = diff;
+        ++prev;
+        ++it;
+    }
+
+    return min_diff;
 }
 
-int    Span::longestSpan(void)
+int Span::longestSpan()
 {
     if (lst.size() <= 1)
         throw NotEnoughException();
-    lst.sort();
-    std::vector<int> diff(lst.size());
-    std::adjacent_difference(lst.begin(), lst.end(), diff.begin());
-    diff.erase(diff.begin());
-    int min_diff = *std::max_element(diff.begin(), diff.end());
-    return (min_diff);
+
+    int min_value = *std::min_element(lst.begin(), lst.end());
+    int max_value = *std::max_element(lst.begin(), lst.end());
+
+    return max_value - min_value;
 }
+
 
 void Span::mult_add(unsigned int nbr)
 {

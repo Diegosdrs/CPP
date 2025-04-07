@@ -6,7 +6,7 @@
 #    By: dsindres <dsindres@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/14 14:31:28 by dsindres          #+#    #+#              #
-#    Updated: 2025/01/29 12:23:21 by dsindres         ###   ########.fr        #
+#    Updated: 2025/04/07 11:30:47 by dsindres         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,12 +16,11 @@ HEADER = ./include/Polish.h
 
 FLAGS = -Wall -Wextra -Werror -std=c++98
 
-SRC = $(wildcard ./src/*.cpp)
+SRC = ./src/RPN.cpp ./src/main.cpp
 
 OBJ_DIR = obj
 
-//OBJ = $(addprefix $(OBJ_DIR)/, $(SRC:.cpp=.o))
-OBJ = $(patsubst ./src/%.cpp, $(OBJ_DIR)/%.o, $(SRC))
+OBJ = ./obj/RPN.o ./obj/main.o
 
 CC = c++
 

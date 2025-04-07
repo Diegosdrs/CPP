@@ -6,7 +6,7 @@
 /*   By: dsindres <dsindres@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 09:36:17 by dsindres          #+#    #+#             */
-/*   Updated: 2025/02/05 15:03:06 by dsindres         ###   ########.fr       */
+/*   Updated: 2025/04/07 11:21:52 by dsindres         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ class PmergeMe
         void    vector_sort(char **av);
         void    display_vector(std::vector<int> vec);
         void    display_message(void);
+        void insertion_sort(std::vector<int>& vec);
+        void merge_sorted_vectors(std::vector<int>& vec1, std::vector<int>& vec2);
         
         //list
         void    list_sort(char **av);
@@ -47,4 +49,6 @@ class PmergeMe
         std::list<int> max_list;
         std::list<int> final_list;
         double time_list;
+
+
 };

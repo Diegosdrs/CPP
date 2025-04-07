@@ -6,7 +6,7 @@
 /*   By: dsindres <dsindres@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 09:13:15 by dsindres          #+#    #+#             */
-/*   Updated: 2025/01/29 12:10:06 by dsindres         ###   ########.fr       */
+/*   Updated: 2025/04/07 09:25:04 by dsindres         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ int main(int ac, char **av)
         return (1);
     }
     std::string filename = av[1];
-    //BitcoinExchange btc(filename);
-    BitcoinExchange *btc = new BitcoinExchange(filename);
-    delete(btc);
+    BitcoinExchange btc(filename);
+    //BitcoinExchange *btc = new BitcoinExchange(filename);
+    //delete(btc);
     return (0);
 }

@@ -6,13 +6,13 @@
 /*   By: dsindres <dsindres@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 09:36:17 by dsindres          #+#    #+#             */
-/*   Updated: 2025/02/05 15:12:10 by dsindres         ###   ########.fr       */
+/*   Updated: 2025/04/07 11:18:33 by dsindres         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/PmergeMe.h"
 
-PmergeMe::PmergeMe(){}
+PmergeMe::PmergeMe() {}
 
 PmergeMe::PmergeMe(int ac, char **av)
 {
@@ -56,9 +56,7 @@ PmergeMe &PmergeMe::operator=(const PmergeMe &other)
     return (*this);
 }
 
-PmergeMe::~PmergeMe(){}
-
-//----------------------------- VECTOR -----------------------------------------
+PmergeMe::~PmergeMe() {}
 
 int PmergeMe::verif_input(char *str)
 {
@@ -78,7 +76,7 @@ void PmergeMe::display_vector(std::vector<int> vec)
     }
 }
 
-void    PmergeMe::display_message(void)
+void PmergeMe::display_message(void)
 {
     std::cout << "Before : ";
     display_vector(this->number);
@@ -90,30 +88,32 @@ void    PmergeMe::display_message(void)
     std::cout << "Time to process of " << this->total_nbr << " elements with std::list : " << this->time_list << std::endl;
 }
 
-void   PmergeMe::vector_sort(char **av)
+void PmergeMe::vector_sort(char **av)
 {
     std::clock_t start = std::clock();
+
     for (int i = 1; av[i]; i++)
     {
         if (verif_input(av[i]) == 1)
         {
             std::cerr << "Error : bad input" << std::endl;
-            return ;
+            return;
         }
         long num = std::atol(av[i]);
         if (num < 0 || num > INT_MAX)
         {
             std::cerr << "Error : bad input" << std::endl;
-            return ;
+            return;
         }
         number.push_back(static_cast<int>(num));
     }
-    for (size_t j = 0; j < number.size(); j+=2)
+
+    for (size_t i = 0; i < number.size(); i += 2)
     {
-        if (j + 1 < number.size())
+        if (i + 1 < number.size())
         {
-            int num1 = number[j];
-            int num2 = number[j + 1];
+            int num1 = number[i];
+            int num2 = number[i + 1];
             if (num1 < num2)
             {
                 min.push_back(num1);
@@ -126,60 +126,83 @@ void   PmergeMe::vector_sort(char **av)
             }
         }
         else
-            min.push_back(number[j]);
-    }
-    std::sort(min.begin(), min.end());
-    std::sort(max.begin(), max.end());
-    size_t i = 0;
-    size_t j = 0;
-    while (i < min.size() && j < max.size())
-    {
-        if (min[i] < max[j])
         {
-            final.push_back(min[i]);
-            ++i;
-        }
-        else
-        {
-            final.push_back(max[j]);
-            ++j;
+            min.push_back(number[i]);
         }
     }
-    while (i < min.size())
-    {
-        final.push_back(min[i]);
-        ++i;
-    }
-    while (j < max.size())
-    {
-        final.push_back(max[j]);
-        ++j;
-    }
+    insertion_sort(min);
+    insertion_sort(max);
+
+    merge_sorted_vectors(min, max);
+
     std::clock_t end = std::clock();
     double duration = (end - start) * 1000.0 / (double)CLOCKS_PER_SEC;
     time_vector = duration;
 }
 
-//----------------------------- LIST -----------------------------------------
+void PmergeMe::insertion_sort(std::vector<int>& vec)
+{
+    for (size_t i = 1; i < vec.size(); ++i)
+    {
+        int key = vec[i];
+        size_t j = i;
+        while (j > 0 && vec[j - 1] > key)
+        {
+            vec[j] = vec[j - 1];
+            --j;
+        }
+        vec[j] = key;
+    }
+}
 
-void   PmergeMe::list_sort(char **av)
+void PmergeMe::merge_sorted_vectors(std::vector<int>& vec1, std::vector<int>& vec2)
+{
+    size_t i = 0, j = 0;
+    while (i < vec1.size() && j < vec2.size())
+    {
+        if (vec1[i] < vec2[j])
+        {
+            final.push_back(vec1[i]);
+            ++i;
+        }
+        else
+        {
+            final.push_back(vec2[j]);
+            ++j;
+        }
+    }
+    while (i < vec1.size())
+    {
+        final.push_back(vec1[i]);
+        ++i;
+    }
+    while (j < vec2.size())
+    {
+        final.push_back(vec2[j]);
+        ++j;
+    }
+}
+
+void PmergeMe::list_sort(char **av)
 {
     std::clock_t start = std::clock();
+
     for (int i = 1; av[i]; i++)
     {
         if (verif_input(av[i]) == 1)
         {
             std::cerr << "Error : bad input" << std::endl;
-            return ;
+            return;
         }
         long num = std::atol(av[i]);
         if (num < 0 || num > INT_MAX)
         {
             std::cerr << "Error : bad input" << std::endl;
-            return ;
+            return;
         }
-       list.push_back(static_cast<int>(num));
+        list.push_back(static_cast<int>(num));
     }
+
     std::list<int>::iterator it = list.begin();
     while (it != list.end())
     {

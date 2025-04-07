@@ -6,7 +6,7 @@
 #    By: dsindres <dsindres@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/14 14:31:28 by dsindres          #+#    #+#              #
-#    Updated: 2025/02/05 09:35:04 by dsindres         ###   ########.fr        #
+#    Updated: 2025/04/07 11:26:22 by dsindres         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,15 +16,13 @@ HEADER = ./include/PmergeMe.h
 
 FLAGS = -Wall -Wextra -Werror -std=c++98
 
-SRC = $(wildcard ./src/*.cpp)
+SRC = ./src/PmergeMe.cpp ./src/main.cpp
 
 OBJ_DIR = obj
 
-//OBJ = $(addprefix $(OBJ_DIR)/, $(SRC:.cpp=.o))
-OBJ = $(patsubst ./src/%.cpp, $(OBJ_DIR)/%.o, $(SRC))
+OBJ = ./obj/PmergeMe.o ./obj/main.o 
 
 CC = c++
-
 
 all : $(NAME)
 
@@ -43,7 +41,6 @@ clean :
 fclean : clean
 	@rm -rf $(NAME)
 	@echo "fcleaned :)"
-
 
 re : fclean all
 

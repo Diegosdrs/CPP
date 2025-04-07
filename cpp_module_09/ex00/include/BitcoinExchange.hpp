@@ -6,7 +6,7 @@
 /*   By: dsindres <dsindres@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 09:12:15 by dsindres          #+#    #+#             */
-/*   Updated: 2025/01/29 12:04:15 by dsindres         ###   ########.fr       */
+/*   Updated: 2025/04/07 09:37:25 by dsindres         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ class BitcoinExchange
         std::string filename;
         std::map<std::string, float> map;
         
-        void    DataParsing(std::ifstream &data); 
+        void    DataParsing(std::ifstream &data);
         std::string new_line(std::string line);
         float   new_value(std::string line);
         void    exchange(std::string filename);

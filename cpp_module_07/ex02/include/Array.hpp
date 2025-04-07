@@ -6,7 +6,7 @@
 /*   By: dsindres <dsindres@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 10:44:20 by dsindres          #+#    #+#             */
-/*   Updated: 2025/01/15 15:35:51 by dsindres         ###   ########.fr       */
+/*   Updated: 2025/04/02 10:28:33 by dsindres         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ class Array
         Array& operator=(Array const &other);
         ~Array();
 
-        int size(void) const;
-        T& operator[](int n);
-        T operator[](int n) const;
+        size_t size(void) const;
+        T& operator[](size_t n);
+        const T& operator[](size_t n) const;
         
         class OutOfBoundException : public std::exception
         {
@@ -34,6 +34,6 @@ class Array
         };
         
     private :
-        int len;
+        size_t len;
         T   *array; 
 };

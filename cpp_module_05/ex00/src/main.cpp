@@ -6,7 +6,7 @@
 /*   By: dsindres <dsindres@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 11:40:15 by dsindres          #+#    #+#             */
-/*   Updated: 2025/01/08 10:42:24 by dsindres         ###   ########.fr       */
+/*   Updated: 2025/02/06 10:27:03 by dsindres         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	main(void)
 
 	try
 	{
-		a = new Bureaucrat("Abraham Willis Stevenson", 15);
+		a = new Bureaucrat("Abraham Willis Stevenson", 5);
 		//std::cout << a->getName() << " grade " << a->getGrade() << std::endl;
 		std::cout << *a << std::endl;
 		a->decremente();
